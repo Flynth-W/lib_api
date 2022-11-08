@@ -1,0 +1,25 @@
+== Deno ~ MongoDB
+
+== lib api 
+
+//=== getting started
+//
+//----
+//include::./example/simple.ts[]
+//----
+
+
+=== Schem Model
+
+[source.try-it,ts]
+----
+include::./example/simple/model.ts[]
+----
+
+ 
+
+=== Crud mongodb
+
+----
+include::./example/simple/data.ts[]
+----
