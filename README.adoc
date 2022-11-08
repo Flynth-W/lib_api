@@ -1,2 +1,90 @@
 == Deno ~ MongoDB
 === lib api
+
+----
+file example :  example/simple
+----
+
+==== Scheme Model
+
+----
+import { Model } from "../../mods.ts"
+import type { property  } from "../../mods.ts"
+import type { response  } from "../../mods.ts"
+
+// scheme model
+
+function checkAge(min:number,max:number){
+    return (x:number):response=>{
+        if( min <= x && x <= max  ){
+            return {body: x ,statusText:"OK",ok:true}
+        }
+        return {body: x ,statusText:`no esta en los limites ${min} ~ ${max}`,ok:false}
+    }
+}
+
+export type typeUser={
+    nick?:property | number
+    name?:property|string
+    age?:property| number
+}
+
+
+const _modelUser:typeUser={
+    nick:{ check:(x:number):response=>{return {body: x ,statusText:"OK",ok:true}}},
+    name:{ check:(x:string):response=>{return {body: x ,statusText:"OK",ok:true}}},
+    age:{ check:checkAge(18,35)},
+}
+
+export const UserModel= new Model(_modelUser)
+
+//const user:_typeUser={
+//    nick:49029,
+//    name:"exampleName" ,
+//    age:19,
+//}
+//
+//console.log( UserModel.Post(user))
+
+----
+
+==== Crud MongoDB
+
+----
+import { Connect  } from "../../mods.ts"
+// connect to mongodb
+const data={
+    urlmongo:"mongodb://127.0.0.1:8011",
+    dbs:"exampleOne",
+    clltn:"collectionExample"
+}
+
+export const UserClltn=await Connect(data.urlmongo,data.dbs,data.clltn)
+//console.log( await UserClltn.read() )
+
+----
+
+==== Controller
+
+----
+import { UserModel } from "./model.ts"
+import type { typeUser } from "./model.ts"
+import { UserClltn } from "./data.ts"
+
+function ctrllUserPOST(data:{}[]){
+   const resp = UserModel.Post(data[0])
+   if( resp.ok ){
+        UserClltn.create(data)
+   }
+   console.log(resp)
+}
+const user:typeUser={
+    nick:49029,
+    name:"exampleName" ,
+    age:19,
+}
+ctrllUserPOST([user])
+console.log( await UserClltn.read() )
+
+----
+
