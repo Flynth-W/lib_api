@@ -1,3 +1,5 @@
+import { ObjectId } from "../deps.ts"
+
 type Filter=string | Record<never,never>
 
 
@@ -14,6 +16,10 @@ export class CRUD {
             return this.clltn.find({[filter]:{$ne:null}}).toArray()
         }
         return this.clltn.find(filter).toArray()
+    }
+    readById(id:string){
+        const _id = new ObjectId(id)
+        return this.clltn.findOne({_id})
     }
     update(filter:Filter,obj:Record<never,never>){
         if( typeof(filter) == "string" ){
