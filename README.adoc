@@ -2,7 +2,7 @@
 == lib api 
 
 ----
-file example :  example/simple
+file example :  test/simple
 ----
 
 ==== Scheme Model
