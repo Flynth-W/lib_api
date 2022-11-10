@@ -8,7 +8,11 @@ export class CRUD {
     constructor(collection:any){
         this.clltn=collection
     }
-    create(obj:Record<never,never>[]){
+    create(obj:Record<never,never>[]|Record<never,never>){
+        if( obj[0] === undefined ){
+            return this.clltn.insertOne(obj)
+        }
+
         return this.clltn.insertMany(obj)
     }
     read(filter?:Filter){
