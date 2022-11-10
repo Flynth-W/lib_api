@@ -17,10 +17,6 @@ export class CRUD {
         }
         return this.clltn.find(filter).toArray()
     }
-    readById(id:string){
-        const _id = new ObjectId(id)
-        return this.clltn.findOne({_id})
-    }
     update(filter:Filter,obj:Record<never,never>){
         if( typeof(filter) == "string" ){
             return this.clltn.updateMany({[filter]:{$ne:null}},{$set :{...obj}})
@@ -38,6 +34,23 @@ export class CRUD {
             return this.clltn.updateMany({[filter]:{$ne:null}},{$unset :{[prop]:0}})
         }
         return this.clltn.updateMany(filter,{$unset :{[prop]:0}})
+    }
+    // Crud By Id
+    readById(id:string){
+        const _id = new ObjectId(id)
+        return this.clltn.findOne({_id})
+    }
+    deleteById(id:string){
+        const _id = new ObjectId(id)
+        return this.clltn.deleteOne({_id})
+    }
+    updateById(id:string,obj:Record<never,never>){
+        const _id = new ObjectId(id)
+        return this.clltn.updateMany({_id},{$set :{...obj}})
+    }
+    deletePropById(id:string,prop:string){
+        const _id = new ObjectId(id)
+        return this.clltn.updateMany({_id},{$unset :{[prop]:0}})
     }
 }
 
