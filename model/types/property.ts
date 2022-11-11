@@ -1,5 +1,5 @@
-import { respons } from "./response.ts"
+import { response } from "./response.ts"
 export type property={
-    check:(x:any)=>respons
+    check:(x:any,mtd?:string)=>response
 }
 
