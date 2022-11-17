@@ -1,5 +1,5 @@
 import {  MongoClient} from "../deps.ts";
-import { CRUD } from "./CRUD.ts"
+//import { CRUD } from "./CRUD.ts"
 
 
 
@@ -9,8 +9,9 @@ export async function  Connect(urlMongo:string,dbs:string,clltn:string){
     await client.connect(urlMongo);
     const db = client.database(dbs);
     const _clltn = db.collection(clltn)
-    const cltm= new CRUD(_clltn)
-    return cltm
+    return _clltn
+//    const cltm= new CRUD(_clltn)
+//    return cltm
 }
 
 //Forma de usar :
