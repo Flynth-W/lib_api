@@ -1,5 +1,4 @@
 import {  MongoClient} from "../deps.ts";
-//import { CRUD } from "./CRUD.ts"
 
 
 
@@ -17,8 +16,6 @@ export async function  Connect(urlMongo:string,dbs:string,clltn:string){
     console.error(_e)
     Deno.exit()
   }
-//    const cltm= new CRUD(_clltn)
-//    return cltm
 }
 
 //Forma de usar :
