@@ -22,5 +22,11 @@ const ModelUser:ussser={
 
 export const UserModel= new Model(ModelUser)
 
-//console.log( UserDate.Post(user))
+//const user = { 
+//  nick:3,
+//  name:"juas",
+//  age:4
+//}
+//
+//console.log( UserModel.Post(user))
 
