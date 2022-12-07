@@ -14,7 +14,7 @@ export class Model implements modelClass {
         // verifica todos los datos (all true)
             if( this.model[i] ){
                 const prop=data[i]
-                const resp=this.model[i].check(prop,"put")
+                const resp=this.model[i].check.put(prop)
                 if(resp.ok){
                     newObj={...newObj ,[i]:prop}
                 }else{
@@ -34,7 +34,7 @@ export class Model implements modelClass {
         // verifica todos los datos (all true)
             if( this.model[i] ){
                 const prop=data[i]
-                const resp =this.model[i].check(prop,"post")
+                const resp =this.model[i].check.post(prop)
                 if(resp.ok){
                     newObj={...newObj ,[i]:prop}
                 }else{
