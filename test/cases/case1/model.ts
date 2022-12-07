@@ -13,20 +13,19 @@ type ussser={
     name?:property|string
     age?:property| number
 }
-
 const ModelUser:ussser={
-    nick:{ check:nick } ,
-    name:{ check:names},
-    age:{ check:age(2,10)}
+    nick:{ check:{post:nick,put:nick} } ,
+    name:{ check:{post:names,put:names} },
+    age:{ check:{post:age(2,6),put:age(2,10)} }
 }
 
 export const UserModel= new Model(ModelUser)
 
-//const user = { 
-//  nick:3,
-//  name:"juas",
-//  age:4
-//}
-//
-//console.log( UserModel.Post(user))
+const user = { 
+  nick:3,
+  name:"juas",
+  age:6
+}
+
+console.log( UserModel.Put(user))
 
