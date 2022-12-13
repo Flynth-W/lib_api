@@ -2,12 +2,12 @@ import { modelClass  } from "./interface/modelClass.ts"
 import { response  } from "./types/response.ts"
 import { Resp } from "./interface/Resp.ts"
 
-export class Model implements modelClass {
+export class Model  {
     model:any
     constructor( model:any){
         this.model=model
     }
-    Put<T>(data:T):response{
+    async Put<T>(data:T):Promise<response>{
         // devuelve un nuevo objeto
         let newObj={}
         for( const i in data ){
@@ -26,7 +26,7 @@ export class Model implements modelClass {
         }
         return Resp.CheckOk(newObj)
     }
-    Post<T>(data:T):response{
+    async Post(data:any):Promise<response>{
         // devuelve un nuevo objeto
         let newObj={}
         // deven existir los elementos nesesarios
@@ -34,7 +34,7 @@ export class Model implements modelClass {
         // verifica todos los datos (all true)
             if( this.model[i] ){
                 const prop=data[i]
-                const resp =this.model[i].check.post(prop)
+                const resp =await this.model[i].check.post(prop)
                 if(resp.ok){
                     newObj={...newObj ,[i]:prop}
                 }else{
