@@ -27,5 +27,5 @@ const user = {
   age:6
 }
 
-console.log( UserModel.Put(user))
+console.log( await UserModel.Put(user))
 
